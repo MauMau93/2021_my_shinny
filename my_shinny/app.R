@@ -22,7 +22,7 @@ ui <- fluidPage(
     titlePanel("This is a new Shiny app"),
     includeMarkdown("Untitled.Rmd"),
     selectInput("select", label = h3("Plot by type of alimentation"), 
-                choices = list_choices,
+                choices = character(0),
                 selected = 1),
     h3("Plots"),
     plotOutput(outputId = "plot")
@@ -32,7 +32,11 @@ ui <- fluidPage(
 col_scale <- scale_colour_discrete(limits = unique(msleep$vore))
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
+    updateSelectInput(session, "select",
+                      choices = list_choices,
+                      selected = tail(list_choices, 1)
+    )
     output$plot <- renderPlot({
         ggplot(msleep  %>% filter(vore == input$select), aes(bodywt, sleep_total, colour = vore)) +
             scale_x_log10() +
