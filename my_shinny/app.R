@@ -21,13 +21,18 @@ ui <- fluidPage(
     # Application title
     titlePanel("This is a new Shiny app"),
     includeMarkdown("Untitled.Rmd"),
-    selectInput("select", label = h3("Plot by type of alimentation"), 
-                choices = character(0),
-                selected = 1),
-    h3("Plots"),
-    plotOutput(outputId = "plot")
-    
+    sidebarLayout(
+        sidebarPanel(
+            selectInput("select", label = h3("Plot by type of alimentation"), 
+                        choices = character(0),
+                        selected = 1)
+        ),
+        mainPanel(
+            plotOutput(outputId = "plot")
+        )
+    )
 )
+
 
 col_scale <- scale_colour_discrete(limits = unique(msleep$vore))
 
