@@ -16,7 +16,7 @@ list_choices <- list_choices[!is.na(unique(list_choices))]
 names(list_choices) <- paste(list_choices,"vore")
 
 # Define UI for application that draws a histogram
-ui <- navbarPage(
+ui <- navbarPage("shinny app",
     tabPanel("msleep",
     fluidPage(
 
