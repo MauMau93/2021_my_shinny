@@ -91,7 +91,6 @@ server <- function(input, output, session) {
     output$info <- renderTable({
         if(input$select != ""){
             nearPoints(msleep 
-                       %>% filter(vore == input$select) 
                        %>% select(name, bodywt,  sleep_total, sleep_rem, sleep_cycle ), 
                        input$plot_click, threshold = 10, maxpoints = 1,
                        addDist = TRUE)
